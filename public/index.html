@@ -1,0 +1,265 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appayon Indian Restaurant - Authentic Indian Cuisine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-text">APPAYON</span>
+                <span class="logo-sub">Indian Restaurant</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#hours">Hours</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#reservation">Book Table</a></li>
+                <li><a href="#find-us">Find Us</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Appayon Indian Restaurant</h1>
+                <p class="hero-subtitle">Authentic Indian Cuisine in Heart of Poynton</p>
+                <p class="hero-description">Experience the rich flavors and spices of traditional Indian cooking in a warm, inviting atmosphere.</p>
+                <button class="btn btn-primary scroll-to-booking">
+                    <i class="fas fa-calendar-alt"></i> Book a Table
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Hours -->
+    <section id="hours" class="section hours-section">
+        <div class="container">
+            <h2 class="section-title">Opening Hours</h2>
+            <div class="hours-cards">
+                <div class="hours-card">
+                    <div class="hours-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Friday - Saturday</h3>
+                    <p class="hours-time">17:00 - 00:00</p>
+                    <p class="hours-note">Last orders at 23:30</p>
+                </div>
+                <div class="hours-card">
+                    <div class="hours-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Sunday - Thursday</h3>
+                    <p class="hours-time">17:00 - 23:00</p>
+                    <p class="hours-note">Last orders at 22:30</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact -->
+    <section id="location" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">Location & Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <address>
+                        <p>2 Chester Road, Poynton</p>
+                        <p>SK12 1QT, UK</p>
+                    </address>
+                    <a href="https://maps.google.com/?q=2+Chester+Road+Poynton+SK12+1QT+UK" 
+                       target="_blank" 
+                       class="btn btn-outline">
+                        <i class="fas fa-directions"></i> Get Directions on Google Maps
+                    </a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-phone"></i> Phone: <a href="tel:01625850020">01625 850020</a></p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/447410590605" target="_blank">07410 590605</a></p>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:info@appayon.co.uk">info@appayon.co.uk</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Form -->
+    <section id="reservation" class="section booking-section">
+        <div class="container">
+            <h2 class="section-title">Reserve Your Table</h2>
+            <p class="section-subtitle">Fill in details below to book your table</p>
+            
+            <form id="booking-form" class="booking-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    <div class="error-message" id="name-error"></div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        <div class="error-message" id="phone-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests">Number of Guests *</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select guests</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5 Guests</option>
+                            <option value="6">6 Guests</option>
+                            <option value="7">7 Guests</option>
+                            <option value="8">8 Guests</option>
+                            <option value="9">9 Guests</option>
+                            <option value="10">10 Guests</option>
+                            <option value="10+">10+ Guests</option>
+                        </select>
+                        <div class="error-message" id="guests-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Date *</label>
+                        <input type="date" id="date" name="date" required>
+                        <div class="error-message" id="date-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="time">Time *</label>
+                        <select id="time" name="time" required>
+                            <option value="">Select time</option>
+                            <!-- Times will be populated by JavaScript based on day -->
+                        </select>
+                        <div class="error-message" id="time-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occasion">Occasion (Optional)</label>
+                        <select id="occasion" name="occasion">
+                            <option value="">Select occasion</option>
+                            <option value="Birthday">Birthday</option>
+                            <option value="Anniversary">Anniversary</option>
+                            <option value="Business Meeting">Business Meeting</option>
+                            <option value="Casual Dining">Casual Dining</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="specialRequests">Special Requests / Allergies</label>
+                    <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Any special requests or allergy information..."></textarea>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fas fa-check-circle"></i> Reserve Table
+                    </button>
+                </div>
+                
+                <div id="form-message" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Find Us Section -->
+    <section id="find-us" class="section map-section">
+        <div class="container">
+            <h2 class="section-title">Find Us</h2>
+            <div class="map-container">
+                <div class="map-address">
+                    <h3>Appayon Indian Restaurant</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 2 Chester Road, Poynton</p>
+                        <p>SK12 1QT, United Kingdom</p>
+                    </address>
+                    <div class="map-info">
+                        <p><i class="fas fa-phone"></i> <a href="tel:01625850020">01625 850020</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@appayon.co.uk">info@appayon.co.uk</a></p>
+                    </div>
+                    <a href="https://maps.google.com/?q=2+Chester+Road+Poynton+SK12+1QT+UK" 
+                       target="_blank" 
+                       class="btn btn-outline">
+                        <i class="fas fa-directions"></i> Get Directions on Google Maps
+                    </a>
+                </div>
+                <div class="map-placeholder">
+                    <div class="map-content">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Map Location</h3>
+                        <p>2 Chester Road, Poynton SK12 1QT</p>
+                        <a href="https://maps.google.com/?q=2+Chester+Road+Poynton+SK12+1QT+UK" 
+                           target="_blank" 
+                           class="btn btn-primary">
+                            Open in Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">APPAYON</span>
+                    <span class="logo-sub">Indian Restaurant</span>
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2024 Appayon Indian Restaurant. All rights reserved.</p>
+                    <p>
+                        <a href="https://www.appayonindianrestaurant.co.uk" target="_blank">www.appayonindianrestaurant.co.uk</a> | 
+                        <a href="/admin">Admin Access</a>
+                    </p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
+```
+                          
