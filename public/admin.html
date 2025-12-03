@@ -1,0 +1,583 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appayon Admin - Reservation Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Admin-specific styles */
+        .admin-container {
+            min-height: 100vh;
+            background: var(--dark-charcoal);
+        }
+        
+        /* Login Section */
+        .login-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .login-card {
+            background: var(--charcoal);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--light-charcoal);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .login-logo h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .login-logo p {
+            color: var(--light-gray);
+        }
+        
+        /* Admin Dashboard */
+        .admin-header {
+            background: var(--charcoal);
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--light-charcoal);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .admin-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-title h2 {
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        
+        .admin-title p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        .logout-btn {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+        }
+        
+        .logout-btn:hover {
+            background: var(--dark-red);
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--charcoal);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--light-charcoal);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Filters */
+        .filters {
+            background: var(--charcoal);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--light-charcoal);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            align-items: flex-end;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            color: var(--white);
+            font-weight: 500;
+        }
+        
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--light-charcoal);
+            border-radius: var(--radius-md);
+            background: var(--dark-charcoal);
+            color: var(--white);
+        }
+        
+        .search-group {
+            position: relative;
+        }
+        
+        .search-group input {
+            padding-left: 2.5rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-gray);
+        }
+        
+        /* Bookings Table */
+        .bookings-container {
+            background: var(--charcoal);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--light-charcoal);
+            overflow: hidden;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+        
+        .bookings-table th {
+            background: var(--dark-charcoal);
+            color: var(--gold);
+            font-weight: 600;
+            text-align: left;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--light-charcoal);
+        }
+        
+        .bookings-table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--light-charcoal);
+            color: var(--light-gray);
+        }
+        
+        .bookings-table tbody tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .bookings-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Status badges */
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: var(--warning);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .status-confirmed {
+            background: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .status-cancelled {
+            background: rgba(220, 53, 69, 0.2);
+            color: var(--error);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+        
+        .action-btn {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+        
+        .btn-confirm {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-confirm:hover {
+            background: #218838;
+        }
+        
+        .btn-cancel {
+            background: var(--error);
+            color: white;
+        }
+        
+        .btn-cancel:hover {
+            background: #c82333;
+        }
+        
+        .btn-view {
+            background: var(--primary-red);
+            color: white;
+        }
+        
+        .btn-view:hover {
+            background: var(--dark-red);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-md);
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--charcoal);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--light-charcoal);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--light-charcoal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            color: var(--white);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--light-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            color: var(--white);
+        }
+        
+        .modal-body {
+            padding: var(--spacing-md);
+        }
+        
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .detail-group {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .detail-group label {
+            display: block;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .detail-group p {
+            color: var(--white);
+            font-weight: 500;
+        }
+        
+        .detail-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .modal-actions {
+            padding: var(--spacing-md);
+            border-top: 1px solid var(--light-charcoal);
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: flex-end;
+        }
+        
+        /* Responsive admin */
+        @media (max-width: 768px) {
+            .login-card {
+                margin: var(--spacing-md);
+                padding: var(--spacing-lg);
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                min-width: 100%;
+            }
+            
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+            
+            .modal-content {
+                margin: var(--spacing-md);
+            }
+        }
+        
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--light-gray);
+        }
+        
+        .loading i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--light-gray);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--light-charcoal);
+            margin-bottom: var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Login Section (initially visible) -->
+        <section id="login-section" class="login-section">
+            <div class="login-card">
+                <div class="login-logo">
+                    <h1>APPAYON</h1>
+                    <p>Reservation Dashboard</p>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter password">
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Admin Dashboard (hidden initially) -->
+        <div id="admin-dashboard" style="display: none;">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="container admin-header-content">
+                    <div class="admin-title">
+                        <h2>Appayon Admin</h2>
+                        <p>Reservation Dashboard</p>
+                    </div>
+                    <button id="logout-btn" class="btn logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Main Content -->
+            <main class="container" style="padding: var(--spacing-lg) 0;">
+                <!-- Stats Cards -->
+                <div class="stats-grid" id="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-today">0</div>
+                        <div class="stat-label">Bookings Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-pending">0</div>
+                        <div class="stat-label">Pending Bookings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-confirmed">0</div>
+                        <div class="stat-label">Confirmed Bookings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-cancelled">0</div>
+                        <div class="stat-label">Cancelled Bookings</div>
+                    </div>
+                </div>
+                
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="filter-date">Date</label>
+                        <input type="date" id="filter-date">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-status">Status</label>
+                        <select id="filter-status">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group search-group">
+                        <label for="search">Search</label>
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <input type="text" id="search" placeholder="Search by name or phone...">
+                    </div>
+                    <div class="filter-group">
+                        <button id="reset-filters" class="btn btn-outline">
+                            <i class="fas fa-redo"></i> Reset Filters
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bookings Table -->
+                <div class="bookings-container">
+                    <div class="table-container">
+                        <table class="bookings-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Guests</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Created At</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-tbody">
+                                <!-- Bookings will be loaded here -->
+                                <tr>
+                                    <td colspan="8" class="loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <p>Loading bookings...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Booking Details Modal -->
+        <div id="booking-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Booking Details</h3>
+                    <button class="modal-close" id="modal-close">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Details will be loaded here -->
+                </div>
+                <div class="modal-actions" id="modal-actions">
+                    <!-- Actions will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+```
